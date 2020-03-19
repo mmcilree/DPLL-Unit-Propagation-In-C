@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "literal.h"
 
@@ -16,7 +17,7 @@ Literal new_Literal(char* name, bool truth) {
 		exit(1);
 	}
 
-  this->name = name;
+  this->name = strdup(name);
   this->truth = truth;
 
   return this;
@@ -32,3 +33,11 @@ char* Literal_getName(Literal this) {
 bool Literal_isTrue(Literal this) {
   return this->truth;
 }
+
+bool Literal_compare(Literal this, Literal other) {
+  //TODO
+}
+
+void Literal_print(Literal this) {
+   printf("(%s, %s) ", this->name, this->truth ? "true" : "false");
+ }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "literal.h"
 #include "clause.h"
@@ -34,9 +35,8 @@ void addOneLiteral() {
   Clause_addLiteral(testC, l);
 
   Literal a = Clause_getLiteral(testC, 0);
-  assert(Literal_getName(a) == "a");
+  assert(strcmp(Literal_getName(a), "a") == 0);
   assert(Literal_isTrue(a) == false);
-
 
   assert(Clause_getLength(testC) == 1);
 }
@@ -51,9 +51,9 @@ void addTwoLiterals() {
   Literal a = Clause_getLiteral(testC, 0);
   Literal b = Clause_getLiteral(testC, 1);
 
-  assert(Literal_getName(a) == "a");
+  assert(strcmp(Literal_getName(a), "a") == 0);
   assert(Literal_isTrue(a) == false);
-  assert(Literal_getName(b) == "b");
+  assert(strcmp(Literal_getName(b), "b") == 0);
   assert(Literal_isTrue(b) == true);
 
   assert(Clause_getLength(testC) == 2);
@@ -66,7 +66,7 @@ void addTenLiterals() {
   Literal a = Clause_getLiteral(testC, 0);
 
 
-  assert(Literal_getName(a) == "a");
+  assert(strcmp(Literal_getName(a), "a") == 0);
   assert(Literal_isTrue(a) == false);
 
   assert(Clause_getLength(testC) == 10);
@@ -80,9 +80,9 @@ void addElevenLiterals() {
   Literal a = Clause_getLiteral(testC, 0);
   Literal b = Clause_getLiteral(testC, 10);
 
-  assert(Literal_getName(a) == "a");
+  assert(strcmp(Literal_getName(a), "a") == 0);
   assert(Literal_isTrue(a) == false);
-  assert(Literal_getName(b) == "b");
+  assert(strcmp(Literal_getName(b), "b") == 0);
   assert(Literal_isTrue(b) == true);
 
   assert(Clause_getLength(testC) == 11);
@@ -102,9 +102,9 @@ void addFiveThousandLiterals() {
   Literal a = Clause_getLiteral(testC, 0);
   Literal b = Clause_getLiteral(testC, 2500);
 
-  assert(Literal_getName(a) == "a");
+  assert(strcmp(Literal_getName(a), "a") == 0);
   assert(Literal_isTrue(a) == false);
-  assert(Literal_getName(b) == "b");
+  assert(strcmp(Literal_getName(b), "b") == 0);
   assert(Literal_isTrue(b) == true);
 
   assert(Clause_getLength(testC) == 5000);

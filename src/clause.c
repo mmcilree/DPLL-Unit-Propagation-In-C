@@ -40,6 +40,7 @@ void Clause_free(Clause this) {
 }
 
 void Clause_addLiteral(Clause this, Literal l) {
+
   if(this->length < this->capacity) {
     this->literals[this->length++] = l;
   } else {
@@ -64,4 +65,18 @@ Literal Clause_getLiteral(Clause this, int index) {
   }
 
   return this->literals[index];
+}
+
+bool Clause_containsLiteral(Clause this, Literal l) {
+  for(int i = 0; i < this->length; i++) {
+    //TODO
+  }
+}
+
+void Clause_print(Clause this) {
+  Literal l;
+  for(int i = 0; i < this->length; i++) {
+    l = this->literals[i];
+    Literal_printLiteral(l);
+  }
 }

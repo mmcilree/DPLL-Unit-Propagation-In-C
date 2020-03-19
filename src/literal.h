@@ -6,8 +6,10 @@
 typedef struct Literal* Literal;
 
 Literal new_Literal(char* name, bool truth);
-void Literal_free(Literal this);
-char* Literal_getName(Literal this);
-bool Literal_isTrue(Literal this);
+void Literal_free(Literal);
+char* Literal_getName(Literal);
+bool Literal_isTrue(Literal);
+bool Literal_compare(Literal this, Literal other);
+void Literal_print(Literal);
 
 #endif

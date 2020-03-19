@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "literal.h"
 
@@ -24,7 +25,7 @@ void runTest(void (*testFunction)()) {
 }
 
 void getName() {
-  assert(Literal_getName(testL) == "a");
+  assert(strcmp(Literal_getName(testL), "a") == 0);
 }
 
 void getTruth() {
