@@ -1,11 +1,11 @@
 CC=clang
 CFLAGS=-Wall -Wextra -Wno-char-subscripts
 
-parser: parser.o formula.o clause.o literal.o
-	$(CC) $(CFLAGS) -o parser parser.o formula.o clause.o literal.o
+main: main.o propagator.o parser.o formula.o clause.o literal.o
+	$(CC) $(CFLAGS) -o main main.o propagator.o parser.o formula.o clause.o literal.o
 
 clean:
-	rm -f C test_literal test_clause test_formula *.o
+	rm -f main test_literal test_clause test_formula *.o
 
 literal.o: literal.c literal.h
 	$(CC) $(CFLAGS) -c literal.c
@@ -18,6 +18,14 @@ formula.o: formula.c clause.h
 
 parser.o: parser.c parser.h formula.h clause.h literal.h
 	$(CC) $(CFLAGS) -c parser.c
+
+propagator.o: propagator.c propagator.h formula.h clause.h literal.h
+	$(CC) $(CFLAGS) -c propagator.c
+
+main.o: main.c propagator.h parser.h formula.h
+	$(CC) $(CFLAGS) -c main.c
+
+
 
 tests: test_literal test_clause test_formula
 

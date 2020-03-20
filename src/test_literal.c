@@ -32,8 +32,16 @@ void getTruth() {
   assert(Literal_isTrue(testL) == false);
 }
 
+void checkEqual() {
+	Literal otherL = new_Literal("a", false);
+	assert(testL != otherL);
+	assert(Literal_isEqual(testL, otherL));
+	assert(Literal_isEqual(otherL, testL));
+}
+
 int main(void) {
 	runTest(getName);
   runTest(getTruth);
+	runTest(checkEqual);
 	printf("All %d tests successful\n", successes);
 }

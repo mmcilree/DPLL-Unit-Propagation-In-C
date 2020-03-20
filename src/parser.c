@@ -62,7 +62,6 @@ Formula buildFormula() {
       clause = parseLine(line);
       Formula_addClause(formula, clause);
       length = 0;
-      printFormula(formula);
     } else {
       line[length++] = c;
     }

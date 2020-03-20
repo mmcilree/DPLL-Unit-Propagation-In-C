@@ -55,6 +55,13 @@ void Clause_addLiteral(Clause this, Literal l) {
   }
 }
 
+void Clause_removeLiteral(Clause this, int index) {
+  for(int i = index; i < this->length - 1; i++) {
+    this->literals[i] = this->literals[i+1];
+  }
+  this->length--;
+}
+
 int Clause_getLength(Clause this) {
   return this->length;
 }
@@ -67,16 +74,20 @@ Literal Clause_getLiteral(Clause this, int index) {
   return this->literals[index];
 }
 
-bool Clause_containsLiteral(Clause this, Literal l) {
+int Clause_findLiteral(Clause this, Literal l) {
   for(int i = 0; i < this->length; i++) {
-    //TODO
+    if(Literal_isEqual(l, this->literals[i])) {
+      return i;
+    }
   }
+
+  return -1;
 }
 
 void Clause_print(Clause this) {
   Literal l;
   for(int i = 0; i < this->length; i++) {
     l = this->literals[i];
-    Literal_printLiteral(l);
+    Literal_print(l);
   }
 }

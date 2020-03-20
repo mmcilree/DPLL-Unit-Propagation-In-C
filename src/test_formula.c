@@ -112,6 +112,39 @@ void addFiveThousandClauses() {
   assert(Formula_getLength(testF) == 5000);
 }
 
+void addAndRemoveClause() {
+	Clause c = new_Clause();
+	Clause_addLiteral(c, new_Literal("b", true));
+  Formula_addClause(testF, c);
+
+	assert(Formula_getLength(testF) == 1);
+
+	Formula_removeClause(testF, 0);
+
+	assert(Formula_getLength(testF) == 0);
+	assert(Formula_getClause(testF, 0) == NULL);
+}
+
+void addTwoAndRemoveOneClause() {
+	Clause c1 = new_Clause();
+  Clause c2 = new_Clause();
+
+	Clause_addLiteral(c2, new_Literal("b", true));
+
+  Formula_addClause(testF, c1);
+  Formula_addClause(testF, c2);
+
+  assert(Formula_getLength(testF) == 2);
+
+	Formula_removeClause(testF, 0);
+	assert(Formula_getLength(testF) == 1);
+
+	Clause n = Formula_getClause(testF, 1);
+	Clause b = Formula_getClause(testF, 0);
+	assert(Clause_getLength(b) == 1);
+	assert(n == NULL);
+}
+
 int main(void) {
   runTest(createEmptyFormula);
   runTest(addOneClause);
@@ -119,5 +152,7 @@ int main(void) {
   runTest(addTenClauses);
   runTest(addElevenClauses);
   runTest(addFiveThousandClauses);
+	runTest(addAndRemoveClause);
+	runTest(addTwoAndRemoveOneClause);
 	printf("All %d tests successful\n", successes);
 }

@@ -54,6 +54,13 @@ void Formula_addClause(Formula this, Clause c) {
   }
 }
 
+void Formula_removeClause(Formula this, int index) {
+  for(int i = index; i < this->length - 1; i++) {
+    this->clauses[i] = this->clauses[i+1];
+  }
+  this->length--;
+}
+
 int Formula_getLength(Formula this) {
   return this->length;
 }
@@ -71,7 +78,7 @@ void Formula_print(Formula this) {
   for(int i = 0; i < this->length; i++) {
     c = this->clauses[i];
     printf("Clause %d has %d literals: ", i, Clause_getLength(c));
-    Clause_printClause(c);
+    Clause_print(c);
     printf("\n");
   }
   printf("--------------\n");
