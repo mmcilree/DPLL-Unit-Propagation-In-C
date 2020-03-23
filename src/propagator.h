@@ -4,6 +4,6 @@
 #include "formula.h"
 #include "literal.h"
 
-void propagate(Formula formula, Literal x);
+Clause getUnits(Formula formula);
 
 #endif

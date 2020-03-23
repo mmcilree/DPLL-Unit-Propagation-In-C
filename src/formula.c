@@ -79,7 +79,6 @@ void Formula_print(Formula this) {
     c = this->clauses[i];
     printf("Clause %d has %d literals: ", i, Clause_getLength(c));
     Clause_print(c);
-    printf("\n");
   }
   printf("--------------\n");
 }

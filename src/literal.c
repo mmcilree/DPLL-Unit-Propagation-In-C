@@ -52,5 +52,5 @@ bool Literal_isEqual(Literal this, Literal other) {
 }
 
 void Literal_print(Literal this) {
-   printf("(%s, %s) ", this->name, this->truth ? "true" : "false");
+   printf("%s%s ", this->truth ? "" : "-", this->name);
  }

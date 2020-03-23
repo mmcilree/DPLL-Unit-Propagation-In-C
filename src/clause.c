@@ -90,4 +90,5 @@ void Clause_print(Clause this) {
     l = this->literals[i];
     Literal_print(l);
   }
+  printf("\n");
 }
