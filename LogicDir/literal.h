@@ -11,6 +11,7 @@ void Literal_free(Literal);
 char* Literal_getName(Literal);
 bool Literal_isTrue(Literal);
 bool Literal_isEqual(Literal this, Literal other);
+int Literal_compare(const void * p, const void * q);
 void Literal_print(Literal);
 
 #endif

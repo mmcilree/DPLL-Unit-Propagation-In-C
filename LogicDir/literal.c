@@ -26,7 +26,7 @@ Literal new_Literal(char* name, bool truth) {
 Literal Literal_negate(Literal this) {
   Literal neg = malloc(sizeof(struct Literal));
 	if(this == NULL) {
-		perror("Error creating new Literal");
+		perror("Error negating Literal");
 		exit(1);
 	}
 
@@ -39,6 +39,7 @@ Literal Literal_negate(Literal this) {
 void Literal_free(Literal this) {
   free(this);
 }
+
 char* Literal_getName(Literal this) {
   return this->name;
 }
@@ -49,6 +50,12 @@ bool Literal_isTrue(Literal this) {
 
 bool Literal_isEqual(Literal this, Literal other) {
   return (strcmp(this->name, other->name) == 0) && (this->truth == other->truth);
+}
+
+int Literal_compare(const void * p, const void * q) {
+   char* l = Literal_getName(*(Literal*)p);
+   char* r = Literal_getName(*(Literal*)q);
+   return strcmp(l, r);
 }
 
 void Literal_print(Literal this) {

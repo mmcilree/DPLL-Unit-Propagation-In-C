@@ -13,4 +13,6 @@ int Clause_getLength(Clause);
 Literal Clause_getLiteral(Clause this, int index);
 int Clause_findLiteral(Clause this, Literal l);
 void Clause_print(Clause);
+void Clause_sortLiterals(Clause this);
+
 #endif

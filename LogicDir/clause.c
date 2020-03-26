@@ -92,3 +92,7 @@ void Clause_print(Clause this) {
   }
   printf("\n");
 }
+
+void Clause_sortLiterals(Clause this) {
+  qsort((void*)this->literals, this->length, sizeof(this->literals[0]), Literal_compare);
+}

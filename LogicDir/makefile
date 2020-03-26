@@ -1,6 +1,8 @@
 CC=clang
 CFLAGS=-Wall -Wextra -Wno-char-subscripts
 
+all: main
+
 main: main.o propagator.o parser.o formula.o clause.o literal.o
 	$(CC) $(CFLAGS) -o main main.o propagator.o parser.o formula.o clause.o literal.o
 
