@@ -39,9 +39,15 @@ void checkEqual() {
 	assert(Literal_isEqual(otherL, testL));
 }
 
+void checkCompare() {
+	Literal otherL = new_Literal("b", false);
+	assert(Literal_compare((void *)&otherL, (void *)&testL) == 1);
+}
+
 int main(void) {
 	runTest(getName);
   runTest(getTruth);
 	runTest(checkEqual);
+	runTest(checkCompare);
 	printf("All %d tests successful\n", successes);
 }

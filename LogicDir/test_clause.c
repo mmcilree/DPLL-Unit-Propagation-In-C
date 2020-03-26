@@ -110,7 +110,7 @@ void addFiveThousandLiterals() {
   assert(Clause_getLength(testC) == 5000);
 }
 
-void findLiteral() {
+void findLiteralInMiddle() {
 	for(int i = 0; i < 5; i++) {
     Clause_addLiteral(testC, new_Literal("a", false));
   }
@@ -125,6 +125,29 @@ void findLiteral() {
 	int index = Clause_findLiteral(testC, toFind);
 
 	assert(index == 5);
+}
+
+void findLiteralAtStart() {
+	Clause_addLiteral(testC, new_Literal("b", true));
+	for(int i = 0; i < 10; i++) {
+    Clause_addLiteral(testC, new_Literal("a", false));
+  }
+	Literal toFind = new_Literal("b", true);
+	int index = Clause_findLiteral(testC, toFind);
+
+	assert(index == 0);
+}
+
+void findLiteralAtEnd() {
+	for(int i = 0; i < 10; i++) {
+    Clause_addLiteral(testC, new_Literal("a", false));
+  }
+	Clause_addLiteral(testC, new_Literal("b", true));
+
+	Literal toFind = new_Literal("b", true);
+	int index = Clause_findLiteral(testC, toFind);
+
+	assert(index == 10);
 }
 
 void findMissing() {
@@ -145,7 +168,9 @@ int main(void) {
   runTest(addTenLiterals);
   runTest(addElevenLiterals);
   runTest(addFiveThousandLiterals);
-	runTest(findLiteral);
+	runTest(findLiteralInMiddle);
+	runTest(findLiteralAtStart);
+	runTest(findLiteralAtEnd);
 	runTest(findMissing);
 	printf("All %d tests successful\n", successes);
 }
