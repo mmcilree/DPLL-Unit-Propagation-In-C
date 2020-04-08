@@ -17,22 +17,15 @@ Literal new_Literal(char* name, bool truth) {
 		exit(1);
 	}
 
-  this->name = strdup(name);
+  this->name = strdup(name); //copy the string
   this->truth = truth;
 
   return this;
 }
 
 Literal Literal_negate(Literal this) {
-  Literal neg = malloc(sizeof(struct Literal));
-	if(this == NULL) {
-		perror("Error negating Literal");
-		exit(1);
-	}
-
-  neg->name = strdup(this->name);
-  neg->truth = !this->truth;
-
+  //Create new literal with opposite truth value.
+  Literal neg = new_Literal(this->name, !this->truth);
   return neg;
 }
 
@@ -53,6 +46,7 @@ bool Literal_isEqual(Literal this, Literal other) {
 }
 
 int Literal_compare(const void * p, const void * q) {
+   //Comparator for qsort must cast from void * type.
    char* l = Literal_getName(*(Literal*)p);
    char* r = Literal_getName(*(Literal*)q);
    return strcmp(l, r);

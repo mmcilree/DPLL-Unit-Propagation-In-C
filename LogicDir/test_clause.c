@@ -161,6 +161,43 @@ void findMissing() {
 	assert(index == -1);
 }
 
+void checkSortLetters() {
+	char* scramble = "jocknymphswaqfdrugvexblitz";
+	char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+	char name[2];
+	for(int i = 0; i < 26; i++) {
+		name[0] = scramble[i];
+		name[1] = '\0';
+		Clause_addLiteral(testC, new_Literal(name, i%2));
+	}
+
+	Clause_sortLiterals(testC);
+
+	for(int i = 0; i < 26; i++) {
+		name[0] = alphabet[i];
+		name[1] = '\0';
+		assert(strcmp(Literal_getName(Clause_getLiteral(testC, i)), name) == 0);
+	}
+}
+
+void checkSortNumbers() {
+	char* scramble[9] = { "8", "1", "3", "9", "2", "7", "5", "6", "4"};
+	char name[2];
+	for(int i = 0; i < 9; i++) {
+		Clause_addLiteral(testC, new_Literal(scramble[i], i%2));
+	}
+
+	Clause_sortLiterals(testC);
+	Clause_print(testC);
+
+	for(int i = 1; i < 10; i++) {
+		name[0] = ('0' + i);
+		name[1] = '\0';
+		printf("%s", name);
+		assert(strcmp(Literal_getName(Clause_getLiteral(testC, i)), name) == 0);
+	}
+}
+
 int main(void) {
   runTest(createEmptyClause);
   runTest(addOneLiteral);
@@ -172,5 +209,7 @@ int main(void) {
 	runTest(findLiteralAtStart);
 	runTest(findLiteralAtEnd);
 	runTest(findMissing);
+	runTest(checkSortLetters);
+	runTest(checkSortNumbers);
 	printf("All %d tests successful\n", successes);
 }
