@@ -27,11 +27,38 @@ void runTest(void (*testFunction)()) {
 	teardown();
 }
 
+/**
+ * createEmptyFormula: Checks that an empty formula has length 0.
+ */
 void createEmptyFormula() {
   assert(testF != NULL);
   assert(Formula_getLength(testF) == 0);
 }
 
+/**
+ * getOutOfBounds: Checks that trying to get a clause with an out of bounds index
+ *                 returns null.
+ */
+void getOutOfBounds() {
+	Formula_addClause(testF, new_Clause());
+	assert(Formula_getClause(testF, 1) == NULL);
+	assert(Formula_getClause(testF, -1) == NULL);
+}
+
+/**
+ * removeOutOfBounds: Checks that removing a clause with an out of bounds index
+ *                    has no effect.
+ */
+void removeOutOfBounds() {
+	Formula_addClause(testF, new_Clause());
+	Formula_removeClause(testF, 1);
+	Formula_removeClause(testF, -1);
+	assert(Formula_getLength(testF) == 1);
+}
+
+/**
+ * addOneClause: Checks that a single clause can be added to a formula.
+ */
 void addOneClause() {
   Clause c = new_Clause();
   Formula_addClause(testF, c);
@@ -42,6 +69,9 @@ void addOneClause() {
   assert(Formula_getLength(testF) == 1);
 }
 
+/**
+ * addTwoClauses: Checks that two different clauses can be added to a formula.
+ */
 void addTwoClauses() {
   Clause c1 = new_Clause();
   Clause c2 = new_Clause();
@@ -59,6 +89,9 @@ void addTwoClauses() {
   assert(Formula_getLength(testF) == 2);
 }
 
+/**
+ * addTenClauses: Checks that a formula can be filled to its initial capacity.
+ */
 void addTenClauses() {
   for(int i = 0; i < 10; i++) {
     Formula_addClause(testF, new_Clause());
@@ -70,6 +103,9 @@ void addTenClauses() {
   assert(Formula_getLength(testF) == 10);
 }
 
+/**
+ * addElevenClauses: Checks that a formula's initial capcacity can be exceeded.
+ */
 void addElevenClauses() {
   for(int i = 0; i < 10; i++) {
     Formula_addClause(testF, new_Clause());
@@ -92,6 +128,10 @@ void addElevenClauses() {
   assert(Formula_getLength(testF) == 11);
 }
 
+/**
+ * addFiveThousandClauses: Checks that a very large number of clauses can be added
+ *                         to the formula.
+ */
 void addFiveThousandClauses() {
   for(int i = 0; i < 2500; i++) {
     Formula_addClause(testF, new_Clause());
@@ -112,6 +152,10 @@ void addFiveThousandClauses() {
   assert(Formula_getLength(testF) == 5000);
 }
 
+/**
+ * addAndRemoveClause: Checks that adding and removing a clause returns the
+ *                     formula to its initial state.
+ */
 void addAndRemoveClause() {
 	Clause c = new_Clause();
 	Clause_addLiteral(c, new_Literal("b", true));
@@ -125,6 +169,10 @@ void addAndRemoveClause() {
 	assert(Formula_getClause(testF, 0) == NULL);
 }
 
+/**
+ * addTwoAndRemoveOneClause: Checks that adding two clauses and removing one
+ *                           leaves one remaining.                               
+ */
 void addTwoAndRemoveOneClause() {
 	Clause c1 = new_Clause();
   Clause c2 = new_Clause();
@@ -147,6 +195,8 @@ void addTwoAndRemoveOneClause() {
 
 int main(void) {
   runTest(createEmptyFormula);
+	runTest(getOutOfBounds);
+	runTest(removeOutOfBounds);
   runTest(addOneClause);
   runTest(addTwoClauses);
   runTest(addTenClauses);

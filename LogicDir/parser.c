@@ -26,10 +26,19 @@ static Clause parseLine(char* line) {
         if(truth != true) {
           ++token; //Discard first character if it is '-'.
         }
-        l = new_Literal(token, truth);
-        Clause_addLiteral(clause, l);
+
+        if(strstr(token, "-") == NULL) { //Ignore token if it contains hyphens.
+          l = new_Literal(token, truth);
+          Clause_addLiteral(clause, l);
+        }
       }
       token = strtok(NULL, delim);
+   }
+
+   if(Clause_getLength(clause) == 0) {
+     //Contradiction
+     printf("-\n");
+     exit(0);
    }
 
    return clause;

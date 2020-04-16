@@ -61,6 +61,10 @@ void Clause_addLiteral(Clause this, Literal l) {
 }
 
 void Clause_removeLiteral(Clause this, int index) {
+  if(index >= this->length || index < 0) {
+    return; //Can't remove out of bounds.
+  }
+
   //Shift all literals down a place.
   for(int i = index; i < this->length - 1; i++) {
     this->literals[i] = this->literals[i+1];
