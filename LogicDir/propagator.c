@@ -11,11 +11,14 @@ static void propagate(Formula formula, Literal x) {
   int index, nindex; //Index of literal and its negation.
   Literal nx = Literal_negate(x);
 
+  //printf(" do this %d times: \n", Formula_getLength(formula));
+
   //Iterate through the clauses of the formula
   for(int i = 0; i < Formula_getLength(formula); i++) {
     currentClause = Formula_getClause(formula, i);
 
     index = Clause_findLiteral(currentClause, x); //Find literal
+    //printf("   found");
     nindex = Clause_findLiteral(currentClause, nx); //Find its negation
 
     if(index != -1) { //If the literal is in the clause, remove the whole clause.
@@ -31,6 +34,7 @@ static void propagate(Formula formula, Literal x) {
       exit(0);
     }
   }
+
 }
 
 
@@ -77,11 +81,14 @@ Clause getUnits(Formula formula) {
         Clause_sortLiterals(units);
         return units;
       }
+
     }
 
     //Take the only literal in the unit clause and propagate it.
     x = Clause_getLiteral(unitClause, 0);
+    //printf("loop #%d ", XXcount++);
     propagate(formula, x);
+
   }
 
   //Formula has been reduced to 0 clauses, so return.

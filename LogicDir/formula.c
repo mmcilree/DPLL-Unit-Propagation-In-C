@@ -65,11 +65,8 @@ void Formula_removeClause(Formula this, int index) {
   if(index >= this->length || index < 0) {
     return; //Can't remove out of bounds.
   }
-
-  //Shift all clauses down a place.
-  for(int i = index; i < this->length - 1; i++) {
-    this->clauses[i] = this->clauses[i+1];
-  }
+  //Swap with end literal
+  this->clauses[index] = this->clauses[this->length-1];
   this->length--;
 }
 

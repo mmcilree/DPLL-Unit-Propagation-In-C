@@ -6,9 +6,17 @@
 #include "parser.h"
 #include "propagator.h"
 #include "formula.h"
+#include "linearpropagator.h"
+
+#include <stdio.h>
 
 int main(void) {
   Formula f = buildFormula();
-  Clause units = getUnits(f);
+  Clause units;
+
+  //units = getUnits(f);
+
+  units = getUnitsLinear(f);
+
   Clause_print(units);
 }

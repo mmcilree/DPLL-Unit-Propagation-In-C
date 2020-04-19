@@ -1,7 +1,3 @@
-Further Testing                   1
-Testing writeup                   1
-Complexity Analysis               3
-L.T Research                      3
 L.T Design                        4
 L.T implementation                4
 L.T Testing                       1
