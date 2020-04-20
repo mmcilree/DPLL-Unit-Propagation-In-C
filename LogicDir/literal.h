@@ -43,6 +43,11 @@ bool Literal_isTrue(Literal);
 bool Literal_isEqual(Literal this, Literal other);
 
 /***********************************************************************************
+ * Literal_equalsName: Returns true if the two Literals have the same name.        *                                                         *
+ ***********************************************************************************/
+bool Literal_equalsName(Literal this, Literal other);
+
+/***********************************************************************************
  * Literal_compare: Comparator function for the qsort function: casts two void     *
  *                  pointers to pointers to the Literal type (itself a pointer to  *
  *                  the a struct Literal), and compares on the lexigraphical value *

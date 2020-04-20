@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "clausemap.h"
 #include "formula.h"
@@ -17,6 +18,7 @@ struct Clausemap {
 
 static void addMapping(Clausemap this, Mapping m) {
   if(this->length < this->capacity) { //Within capacity.
+    printf("Adding mapping (inside function).\n");
     this->mappings[this->length++] = m;
   } else {
     //If we are about to exceed capacity, double it.
@@ -27,6 +29,8 @@ static void addMapping(Clausemap this, Mapping m) {
       perror("Error adding mapping to Clausemap");
       exit(1);
     }
+
+
     this->mappings[this->length++] = m; //Then we can add as normal.
   }
 }
@@ -67,25 +71,63 @@ void Clausemap_free(Clausemap this) {
 void Clausemap_associateClause(Clausemap this, Clause clause) {
   Literal l;
   Mapping m;
-
+  bool found = false;
+  printf("Associating clause...");
+  Clause_print(clause);
+  printf("\n");
   //For each literal in the clause
   for(int i = 0; i < Clause_getLength(clause); i++) {
     l = Clause_getLiteral(clause, i);
+    printf("-Literal %d is ", i);
+    Literal_print(l);
+    printf("\n");
 
-    //Find the mapping to add the clause to.
+    //Try to find the mapping to add the clause to.
     for(int j = 0; j < this->length; j++) {
       if(Mapping_isForLiteral(this->mappings[j], l)) {
-        Mapping_addClause(this->mappings[j], clause);
+        if(Literal_isTrue(l)) {
+          printf("-Found mapping already for ");
+          Literal_print(l);
+          printf("\n");
+          Mapping_addPosClause(this->mappings[j], clause);
+        } else {
+          printf("-Found mapping already for ");
+          Literal_print(l);
+          printf("\n");
+          Mapping_addNegClause(this->mappings[j], clause);
+        }
+        found = true;
         break;
       }
-
-      //If we reach the end and have not found the literal
-      //we need a new mapping.
-      if(j == this->length - 1) {
-        m = new_Mapping(l);
-        addMapping(this, m);
-        Mapping_addClause(m, clause);
-      }
     }
+
+    //If not found, create a new mapping.
+    if(!found) {
+      printf("-Making new mapping...\n");
+      m = new_Mapping(l);
+      addMapping(this, m);
+      if(Literal_isTrue(l)) {
+        Mapping_addPosClause(m, clause);
+      } else {
+        Mapping_addNegClause(m, clause);
+      }
+    } else {
+      found = false;
+    }
+  }
+}
+
+Mapping Clausemap_getMapping(Clausemap this, int index) {
+  return this->mappings[index];
+}
+
+int Clausemap_getLength(Clausemap this) {
+  return this->length;
+}
+
+void Clausemap_print(Clausemap this) {
+  printf("%d mappings: \n", this->length);
+  for(int i = 0; i < this->length; i++) {
+    Mapping_print(this->mappings[i]);
   }
 }

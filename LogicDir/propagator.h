@@ -16,4 +16,9 @@
  ************************************************************************************/
 Clause getUnits(Formula formula);
 
+/***********************************************************************************
+ * addUnits: Helper function to add all units in a formula to a clause.            *
+ ***********************************************************************************/
+void addUnits(Formula formula, Clause units);
+
 #endif

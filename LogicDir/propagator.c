@@ -39,7 +39,7 @@ static void propagate(Formula formula, Literal x) {
 
 
 //Helper function to add all units in a formula to a clause.
-static void addUnits(Formula formula, Clause units) {
+void addUnits(Formula formula, Clause units) {
   Clause current;
   Literal u;
 

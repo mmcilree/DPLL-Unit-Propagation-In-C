@@ -30,7 +30,7 @@ parser.o: parser.c parser.h formula.h clause.h literal.h
 propagator.o: propagator.c propagator.h formula.h clause.h literal.h
 	$(CC) $(CFLAGS) -c propagator.c
 
-linearpropagator.o: linearpropagator.c linearpropagator.h formula.h clause.h clausemap.h
+linearpropagator.o: linearpropagator.c linearpropagator.h formula.h clause.h clausemap.h mapping.h
 	$(CC) $(CFLAGS) -c linearpropagator.c
 
 main.o: main.c propagator.h parser.h formula.h

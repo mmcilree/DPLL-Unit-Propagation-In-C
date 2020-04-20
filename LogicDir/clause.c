@@ -98,9 +98,17 @@ void Clause_print(Clause this) {
     l = this->literals[i];
     Literal_print(l);
   }
-  printf("\n");
+  //printf("\n");
 }
 
 void Clause_sortLiterals(Clause this) {
   qsort((void*)this->literals, this->length, sizeof(this->literals[0]), Literal_compare);
+}
+
+void Clause_makeNull(Clause this) {
+  this = NULL;
+}
+
+void Clause_clear(Clause this) {
+  this->length = 0;
 }

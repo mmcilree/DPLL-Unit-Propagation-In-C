@@ -45,6 +45,10 @@ bool Literal_isEqual(Literal this, Literal other) {
   return (strcmp(this->name, other->name) == 0) && (this->truth == other->truth);
 }
 
+bool Literal_equalsName(Literal this, Literal other) {
+  return (strcmp(this->name, other->name) == 0);
+}
+
 int Literal_compare(const void * p, const void * q) {
    //Comparator for qsort must cast from void * type.
    char* l = Literal_getName(*(Literal*)p);

@@ -58,4 +58,13 @@ void Clause_print(Clause);
  ***********************************************************************************/
 void Clause_sortLiterals(Clause this);
 
+
+void Clause_makeNull(Clause this);
+
+/**
+ * [Clause_clear description]
+ * @param this [description]
+ */
+void Clause_clear(Clause this);
+
 #endif

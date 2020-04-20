@@ -9,6 +9,7 @@
 #define CLAUSEMAP_H
 
 #include "clause.h"
+#include "mapping.h"
 
 typedef struct Clausemap* Clausemap;
 
@@ -27,5 +28,14 @@ void Clausemap_free(Clausemap);
  *                            literals                                              *
  ************************************************************************************/
 void Clausemap_associateClause(Clausemap, Clause);
+
+/***********************************************************************************
+ * Clausemap_print: Display the clausemap (for debugging purposes).                *
+ ***********************************************************************************/
+void Clausemap_print(Clausemap);
+
+Mapping Clausemap_getMapping(Clausemap, int index);
+
+int Clausemap_getLength(Clausemap);
 
 #endif
